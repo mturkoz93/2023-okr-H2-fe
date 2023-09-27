@@ -1,7 +1,6 @@
 import EntryModel from "../../models/Entry";
 
 export default defineEventHandler(async (event) => {
-  console.log("add.post.ts...........")
   const body = await readBody(event);
 
   return await add(body.text);
@@ -9,7 +8,6 @@ export default defineEventHandler(async (event) => {
 
 async function add(text: string) {
   try {
-    console.log("add", text)
     const newEntry = new EntryModel({
       text: text,
       date: new Date(),

@@ -1,11 +1,8 @@
 <template>
     <div class="navbar">
-        <span>{{ user.name }}</span>
         <ul class="menu">
-            <!-- {{  isAuthenticated }} -->
-            
             <li v-if="isAuthenticated"><nuxt-link to="/">Home</nuxt-link></li>
-            <li v-if="isAuthenticated"><nuxt-link to="/entry">Entry</nuxt-link></li>
+            <li v-if="isAuthenticated"><nuxt-link to="/post">Entry</nuxt-link></li>
             <li v-if="isAuthenticated" class="logoutBtn" style="float: right">
                 <a href="#" @click.prevent="logout">Logout</a>
             </li>

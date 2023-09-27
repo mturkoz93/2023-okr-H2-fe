@@ -17,7 +17,7 @@
 import { useEntryStore } from "~/store/entry";
 definePageMeta({
   title: 'Entry',
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: 'auth'
 })
 
 const { sendEntry } = useEntryStore();
@@ -38,7 +38,6 @@ const toast = useToast()
 
 const submit = async (event: FormSubmitEvent<Schema>) => {
   try {
-    console.log(event.data);
     await sendEntry({ text: event.data.text });
     toast.add({ title: 'Successfully!' })
   } catch (error) {

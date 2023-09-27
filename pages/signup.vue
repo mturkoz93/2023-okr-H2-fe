@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-import { useAuthStore } from '~/store/auth'; // import the auth store we just created
+import { useAuthStore } from '~/store/auth';
 
-const { signup } = useAuthStore(); // use authenticateUser action from  auth store
+const { signup } = useAuthStore();
 const router = useRouter();
 
 
@@ -22,8 +21,7 @@ const state = ref({
 });
 
 const submit = async (event: FormSubmitEvent<Schema>) => {
-  await signup({ name: event.data.name, email: event.data.email, password: event.data.password }); // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
+  await signup({ name: event.data.name, email: event.data.email, password: event.data.password });
   router.push('/login');
 };
 </script>

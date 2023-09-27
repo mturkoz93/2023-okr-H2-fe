@@ -1,4 +1,4 @@
-// store/auth.ts
+// store/entry.ts
 
 import { defineStore } from 'pinia';
 import { useUserStore } from './user'
@@ -30,7 +30,6 @@ export const useEntryStore = defineStore(storeNames.ENTRY, {
 
       this.loading = pending;
 
-      // route to home page
       useRouter().push('/');
 
     },

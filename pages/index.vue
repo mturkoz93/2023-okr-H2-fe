@@ -7,12 +7,13 @@
     </div>
   </div>
 </template>
+
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useEntryStore } from '~/store/entry';
 
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: 'auth'
 })
 
 const { listEntries } = useEntryStore();

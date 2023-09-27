@@ -1,5 +1,4 @@
 // store/auth.ts
-
 import { defineStore } from 'pinia';
 import { useUserStore } from './user'
 import { storeNames } from './enums'
@@ -48,11 +47,10 @@ export const useAuthStore = defineStore(storeNames.AUTH, {
         localStorage.setItem("accessToken", JSON.stringify(data?.value?.token));
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("isAuth", 'true');
-        this.isAuthenticated = true; // set authenticated  state value to true
+        this.isAuthenticated = true;
       }
     },
     async signup({ name, email, password }: UserPayloadInterface) {
-      // useFetch from nuxt 3
       const { data, pending }: any = await useFetch('api/signup', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -64,13 +62,12 @@ export const useAuthStore = defineStore(storeNames.AUTH, {
       });
       this.loading = pending;
       return true
-      // route to login page
     },
     async logout() {
       await localStorage.removeItem("accessToken");
       await localStorage.removeItem("user");
       await localStorage.removeItem("isAuth");
-      this.isAuthenticated = false; // set authenticated  state value to false
+      this.isAuthenticated = false;
 
       const { user } = useUserStore();
       user.name = '';

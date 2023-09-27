@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { z } from "zod";
-import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
-import { useAuthStore } from "~/store/auth"; // import the auth store we just created
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/store/auth";
 
-const { login } = useAuthStore(); // use authenticateUser action from  auth store
+const { login } = useAuthStore();
 
-const { isAuthenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+const { isAuthenticated } = storeToRefs(useAuthStore());
 
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 
@@ -26,8 +26,7 @@ const toast = useToast()
 
 const submit = async (event: FormSubmitEvent<Schema>) => {
   try {
-    console.log(event.data);
-    await login({ email: event.data.email, password: event.data.password}); // call authenticateUser and pass the user object
+    await login({ email: event.data.email, password: event.data.password});
     // redirect to homepage if user is authenticated
     if (isAuthenticated) {
       toast.add({ title: 'Successfully!' })
@@ -55,28 +54,6 @@ const submit = async (event: FormSubmitEvent<Schema>) => {
           <UButton size="xl" block type="submit"> Login </UButton>
         </UForm>
       </div>
-
-      <!-- <label for="uname"><b>Username</b></label>
-        <input
-          v-model="user.name"
-          type="text"
-          class="input"
-          placeholder="Enter Username"
-          name="uname"
-          required
-        />
-  
-        <label for="psw"><b>Password</b></label>
-        <input
-          v-model="user.password"
-          type="password"
-          class="input"
-          placeholder="Enter Password"
-          name="psw"
-          required
-        /> -->
-
-      <!-- <button @click.prevent="login" class="button">Login</button> -->
     </div>
   </div>
 </template>

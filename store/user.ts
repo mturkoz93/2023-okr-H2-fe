@@ -1,14 +1,9 @@
-// store/auth.ts
+// store/user.ts
 
 import { defineStore } from 'pinia';
 import { storeNames } from './enums'
 import { useAuthStore } from './auth';
 import { storeToRefs } from 'pinia';
-
-interface UserPayloadInterface {
-  username: string;
-  password: string;
-}
 
 export const useUserStore = defineStore(storeNames.USER, {
   state: () => ({
