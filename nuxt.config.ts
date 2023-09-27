@@ -44,5 +44,7 @@ export default defineNuxtConfig({
     user: process.env.NUXT_DBNAME,
     pass: process.env.NUXT_DBUSERNAME,
     authSource: process.env.NUXT_AUTHSOURCE,
+    tokenSecret: process.env.NUXT_TOKEN_SECRET,
+    tokenExpiration: process.env.NUXT_TOKEN_EXPIRATION,
   },
 });

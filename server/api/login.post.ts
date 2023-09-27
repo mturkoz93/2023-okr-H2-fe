@@ -1,4 +1,6 @@
+import { verifyPassword } from "~/utils/password";
 import UserModel from "../models/User";
+import { createToken } from "~/utils/session";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -10,19 +12,29 @@ async function login(email: string, password: string) {
   try {
     const user = (await UserModel.findOne({
       email: email,
-      password: password,
+      // password: password,
     })) as any;
 
     if (!user) {
       throw new Error("User not found");
     }
 
-    return {
+    const checkPassword = await verifyPassword(user.password, password)
+    if (!checkPassword) {
+      throw new Error("Password is incorrect")
+    }
+    
+    const payload = {
       _id: user._id,
       name: user.name,
-      profile: "profile.png",
       email: user.email,
-      token: "token",
+      profile: "profile.png",
+    };
+    const token = await createToken(payload)
+
+    return {
+      ...payload,
+      token: token,
     };
   } catch (error: any) {
     throw createError({

@@ -5,7 +5,11 @@ const { getUserDetail } = useUserStore()
 
 onMounted(async () => {
   const userLocal = localStorage.getItem('user') as any
-  await getUserDetail(userLocal ? JSON.parse(userLocal)?._id : null)
+  const userId = userLocal ? JSON.parse(userLocal)?._id : false
+
+  if (userId) {
+    await getUserDetail(userId)
+  }
 })
 </script>
 

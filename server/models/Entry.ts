@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 // Defining Schema
 const EntrySchema = new mongoose.Schema({
   text: { type: String, required: true },
+  date: { type: Date, required: true },
 });
 
 // Compiling Schema
