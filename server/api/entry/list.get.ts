@@ -1,6 +1,7 @@
-import EntryModel from "~/server/models/Entry"
+import EntryModel from "~/server/models/Entry";
 
 export default defineEventHandler((event: any) => {
-    const entries = EntryModel.find() as any
-    return entries
-  })
+  console.log("user-id", event.context.user._id);
+  const entries = EntryModel.find({}).populate('user', '-password') as any;
+  return entries;
+});

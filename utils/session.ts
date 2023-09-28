@@ -1,31 +1,34 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 const createToken = async (user: any) => {
-  const config = useRuntimeConfig() as any
+  const config = useRuntimeConfig() as any;
   return await jwt.sign(
     {
-      id: user.id,
-      email: user.email
+      _id: user._id,
+      email: user.email,
     },
     config.tokenSecret,
     {
-      expiresIn: 3600
+      expiresIn: 3600,
     }
-  )
-}
+  );
+};
 const verifyToken = async (token: string) => {
   try {
-  const config = useRuntimeConfig() as any
-  return await jwt.verify(token, config.tokenSecret)
+    const config = useRuntimeConfig() as any;
+    return await jwt.verify(token, config.tokenSecret);
   } catch (err) {
-    return "Token expired"
+    return "Token expired";
   }
-}
+};
 
-const getUserToken = (payload: any) => {
-  const token = verifyToken(payload)
+const getUserToken = async (_token: any) => {
+  const token = await verifyToken(_token);
   if (!token) {
-    return null 
+    return null;
   }
-  return token
-}
-export { createToken, getUserToken }
+  if (token === "Token expired") {
+    return null;
+  }
+  return token;
+};
+export { createToken, getUserToken };

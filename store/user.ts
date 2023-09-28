@@ -21,9 +21,10 @@ export const useUserStore = defineStore(storeNames.USER, {
     async getUserDetail(userId: any) {
       const { user } = useUserStore();
       const { isAuthenticated } = storeToRefs(useAuthStore());
+      const token = localStorage.getItem("accessToken") as any;
       const { data, pending, error }: any = await useFetch(`api/users/${userId}`, {
         method: 'get',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${JSON.parse(token)}` },
       });
 
       if (error.value) {
